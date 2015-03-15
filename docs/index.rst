@@ -11,7 +11,7 @@ If you find this guide helpful, I would apprecate an email of support. If you fi
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :hidden:
 
    authentication
 
