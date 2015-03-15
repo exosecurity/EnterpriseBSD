@@ -24,7 +24,7 @@ import shlex
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
-needs_sphinx = '1.3'
+needs_sphinx = '1.2'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -46,7 +46,7 @@ source_suffix = ['.rst']
 master_doc = 'index'
 
 # General information about the project.
-project = u'EnterpriseBSD'
+project = u'EnterpriseBSD Guide'
 copyright = u'2015, Cary Mathews'
 author = u'Cary Mathews'
 
@@ -222,7 +222,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'EnterpriseBSD.tex', u'EnterpriseBSD Documentation',
+  (master_doc, 'EnterpriseBSD.tex', u'EnterpriseBSD Guide',
    u'Cary Mathews', 'manual'),
 ]
 
@@ -252,7 +252,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'enterprisebsd', u'EnterpriseBSD Documentation',
+    (master_doc, 'enterprisebsd', u'EnterpriseBSD Guide',
      [author], 1)
 ]
 
@@ -266,7 +266,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  (master_doc, 'EnterpriseBSD', u'EnterpriseBSD Documentation',
+  (master_doc, 'EnterpriseBSD', u'EnterpriseBSD Guide',
    author, 'EnterpriseBSD', 'One line description of project.',
    'Miscellaneous'),
 ]
