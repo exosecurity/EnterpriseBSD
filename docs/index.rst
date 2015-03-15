@@ -8,3 +8,11 @@ As an advanced warning or disclaimer: my experience is heavily weighted towards 
 If you find this guide helpful, I would apprecate an email of support. If you find an error, this project is hosted on github, please submit a pull request.
 
 
+Contents:
+
+.. toctree::
+   :maxdepth: 2
+
+   authentication
+
+ 
