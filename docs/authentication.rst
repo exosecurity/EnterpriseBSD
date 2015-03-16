@@ -4,7 +4,7 @@
 Authentication
 **************
 
-Simply put, *authentication* is the act of verifying that an entity is who it claims to be; it answers the question, "Is the claim *authentic*? 
+Simply put, *authentication* is the act of verifying that an entity is who it claims to be; it answers the question, "Is the claim *authentic*?" 
 Traditionally, authentication occurs via the means of a shared secret: a password or passphrase. 
 The "shared" part is that the system **and** the authentic entity both have access to the secret for the purpose of identifying the entity to the system (a one-way validation).
 
