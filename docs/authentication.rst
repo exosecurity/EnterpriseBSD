@@ -90,7 +90,7 @@ To verify a system is in the KDC database, the :manpage:`kadmin(1)` command can 
 	host/kdc-144.example.com
 	kadmin>
 
-If a client does not exist in the database, users will not be able be authorized from that client.
+If a client does not exist in the database, users will not be able be authenticated from that client.
 
  
 .. _Kerberos protocol: http://en.wikipedia.org/wiki/Kerberos_%28protocol%29
