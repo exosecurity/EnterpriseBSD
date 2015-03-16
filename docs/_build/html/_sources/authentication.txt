@@ -68,7 +68,7 @@ The root user may view the contents of the keytab file with the following comman
 	# 
 
 
-To verify a system is in the KDC database, the :manpage:`kadmin(1)` command can list out all the entities (principals) after authenticating a user :ref:`label-Authorization` to do so::
+To verify a system is in the KDC database, the :manpage:`kadmin(1)` command can list out all the entities (principals) after authenticating a user authorized to do so::
 
 	kadmin> list *
 	admin/admin@EXAMPLE.COM's Password: 

@@ -11,11 +11,11 @@ The projects' official documentation -- `DragonFly BSD Handbook`_, the `FreeBSD 
 There are attempts by users to contribute additional documentation in the forms of HOWTOs and blogs.  
 Other sources of documentation are contained in mailing lists, `Stackoverflow`_ questions and answers, and varous forum posts across the internet. 
 However, because many home users do not use these advanced features, the questions, forum posts, and blogs do not exist for the more obscure or complex uses. 
-This guide is my contribution to the BSD ecosystem, a humble attempt at documenting in greater detail these features and how users --from the hobbyist to the starup DevOp to the corporate SysAdmin-- can put the built-in features of the BSDs to work in their environments.
+This guide is my contribution to the BSD ecosystem, a humble attempt at documenting in greater detail these features and how users --from the hobbyist to the start-up DevOp to the corporate SysAdmin-- can put the built-in features of the BSDs to work in their environments.
 
 As an advanced warning or disclaimer: my experience is heavily weighted towards FreeBSD, the first iterations of the content on this site will be exclusivly FreeBSD-based. As my experience with the features of other BSDs grow, I aim to incorporate that knowledged here as well.
 
-If you find this guide helpful, I would apprecate an email of support. If you find an error, this project is hosted on github, please submit a pull request.
+If you find this guide helpful, I would apprecate an `email`_ of support. If you find an error, this project is hosted on `github`_, please submit a pull request.
 
 .. _DragonFly: http://www.dragonflybsd.org
 .. _Free: http://www.freebsd.org
@@ -26,11 +26,13 @@ If you find this guide helpful, I would apprecate an email of support. If you fi
 .. _NetBSD Guide: http://netbsd.org/docs/guide/en/
 .. _OpenBSD FAQ: http://www.openbsd.org/faq/index.html
 .. _DragonFly BSD Handbook: http://www.dragonflybsd.org/docs/newhandbook/
+.. _github: https://github.com/exosecurity/EnterpriseBSD
+.. _email: thanks@
 
 .. toctree::
    :hidden:
 
    authentication
-   authorization
+   
 
  
