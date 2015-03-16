@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Authentication &mdash; EnterpriseBSD 0 documentation</title>
+    <title>Authentication &mdash; EnterpriseBSD Guide 0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -23,8 +23,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="EnterpriseBSD 0 documentation" href="index.html" />
-    <link rel="prev" title="EnterpriseBSD" href="index.html" />
+    <link rel="top" title="EnterpriseBSD Guide 0 documentation" href="index.html" />
+    <link rel="next" title="Authorization" href="authorization.html" />
+    <link rel="prev" title="EnterpriseBSD Guide" href="index.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -38,9 +39,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="index.html" title="EnterpriseBSD"
+          <a href="authorization.html" title="Authorization"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="EnterpriseBSD Guide"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">EnterpriseBSD 0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">EnterpriseBSD Guide 0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -51,13 +55,80 @@
             
   <div class="section" id="authentication">
 <h1>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="subsection-1">
-<h2>subsection 1<a class="headerlink" href="#subsection-1" title="Permalink to this headline">¶</a></h2>
-<p>content for subsection one</p>
+<p>Simply put, <em>authentication</em> is the act of verifying that an entity is who it claims to be; it answers the question, &#8220;Is the claim <em>authentic</em>?
+Traditionally, authentication occurs via the means of a shared secret: a password or passphrase.
+The &#8220;shared&#8221; part is that the system <strong>and</strong> the authentic entity both have access to the secret for the purpose of identifying the entity to the system (a one-way validation).</p>
+<p>In Unix, and the BSD lineage, passwords are stored in a file on the system. For each system a user requires access to, the user must create and remember a password for that system.
+The human mind is not adept enough at creating and remembering multiple strong (15+ characters in length, upper and lower case letters, numbers, special characters, not a dictionary word, etc.) passwords.
+In an environment where a user must access multiple systems and applications, password management becomes a burden on both the users and system administrators.</p>
+<div class="section" id="kerberos-protocol">
+<h2>Kerberos Protocol<a class="headerlink" href="#kerberos-protocol" title="Permalink to this headline">¶</a></h2>
+<p>It was to deal with this situation that the <a class="reference external" href="http://en.wikipedia.org/wiki/Kerberos_%28protocol%29">Kerberos protocol</a> was designed.
+A comprehensive description of the history and development of Kerberos is out of scope of this guide, but the following summarizes the workings and benefits of the protocol.</p>
+<ol class="arabic simple">
+<li>When a user logs on to a system (client) that is part of a Kerberos <em>realm</em>, the client sends the user name to the Authentication Server (AS) and the service the user is requesting (i.e., login).</li>
+<li>The AS verifies the user is in the database and generates a secret key derived from the user&#8217;s password.</li>
+<li>If the client is in the database, the AS returns two encrypted messages: 1) a Client/Ticket-Granting Service (TGS) session key (encrypted with the secret key), and 2) a Ticket-Granting-Ticket (TGT, encrypted with the secret key of the TGS).</li>
+<li>The client generates a secret key from the user-provided password and attempts to decrypt the first message (this is a symetric cipher - the sender and receiver both have the same key).</li>
+<li>If the password provided by the user matches the password retrieved by the AS, the client obtains the Client/TGS session key which is used for future communications with the TGS.</li>
+</ol>
+<p>This authorization process ensures that:</p>
+<ol class="arabic simple">
+<li>the user is defined in a centralized (hopefully protected) database,</li>
+<li>the authorization request is coming from a client system known to the AS (not a rogue system attached to the network), and</li>
+<li>the user&#8217;s password is never transmitted across the network.</li>
+</ol>
+<p>In the case where the AS or KDC is down or inaccessable, the user could not be authenticated. This situation is mitigated by having a primary KDC and multiple secondary KDC which can be queried.</p>
 </div>
-<div class="section" id="subsection-2">
-<h2>subsection 2<a class="headerlink" href="#subsection-2" title="Permalink to this headline">¶</a></h2>
-<p>content for subsection two</p>
+<div class="section" id="kerberos-software">
+<h2>Kerberos Software<a class="headerlink" href="#kerberos-software" title="Permalink to this headline">¶</a></h2>
+<p>FreeBSD includes the <a class="reference external" href="www.h5l.org">Heimdal</a> implementation of the Keberos protocol in the base system.
+The original MIT implementation is available in the ports tree (security/krb5) if users wish to install that.</p>
+<p>The <a class="reference external" href="https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/">FreeBSD Handbook</a> has a good <a class="reference external" href="https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/kerberos5.html">chapter</a> on setting up a Kerberos KDC.
+Since it was written, one change in the set up of a KDC to be aware of is the <cite>/etc/rc.conf</cite> lines, <em>kadmin5_server_enable</em> is deprecated in favor of <em>kadmind_enable</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">kdc_enable</span><span class="o">=</span><span class="s">&quot;YES&quot;</span>
+<span class="n">kadmind_enable</span><span class="o">=</span><span class="s">&quot;YES&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="managing-a-kerberos-realm">
+<h2>Managing a Kerberos Realm<a class="headerlink" href="#managing-a-kerberos-realm" title="Permalink to this headline">¶</a></h2>
+<p>When deploying new systems to your environment, each host will need an entry in the KDC database so it can communicate with the KDC on behalf of users.
+The host stores a shared secret key in the file <cite>/etc/krb5.keytab</cite> that it uses to decrypt messages from the KDC.
+The root user may view the contents of the keytab file with the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre># ktutil -k /etc/krb5.keytab list
+/etc/krb5.keytab:
+
+Vno  Type                     Principal                                       Aliases
+  1  aes256-cts-hmac-sha1-96  host/client.example.com@EXAMPLE.COM
+  1  des3-cbc-sha1            host/client.example.com@EXAMPLE.COM
+  1  arcfour-hmac-md5         host/client.example.com@EXAMPLE.COM
+#
+</pre></div>
+</div>
+<p>To verify a system is in the KDC database, the <em class="manpage">kadmin(1)</em> command can list out all the entities (principals) after authenticating a user <span class="xref std std-ref">label-Authorization</span> to do so:</p>
+<div class="highlight-python"><div class="highlight"><pre>kadmin&gt; list *
+admin/admin@EXAMPLE.COM&#39;s Password:
+alice
+bob
+eve
+admin
+default
+admin/admin
+kadmin/admin
+kadmin/hprop
+kadmin/changepw
+changepw/kerberos
+WELLKNOWN/ANONYMOUS
+krbtgt/EXAMPLE.COM
+nfs/nfs.example.com
+host/client-96.example.com
+host/client-97.example.com
+host/kdc-144.example.com
+kadmin&gt;
+</pre></div>
+</div>
+<p>If a client does not exist in the database, users will not be able be authorized from that client.</p>
 </div>
 </div>
 
@@ -70,15 +141,19 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Authentication</a><ul>
-<li><a class="reference internal" href="#subsection-1">subsection 1</a></li>
-<li><a class="reference internal" href="#subsection-2">subsection 2</a></li>
+<li><a class="reference internal" href="#kerberos-protocol">Kerberos Protocol</a></li>
+<li><a class="reference internal" href="#kerberos-software">Kerberos Software</a></li>
+<li><a class="reference internal" href="#managing-a-kerberos-realm">Managing a Kerberos Realm</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
-                        title="previous chapter">EnterpriseBSD</a></p>
+                        title="previous chapter">EnterpriseBSD Guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="authorization.html"
+                        title="next chapter">Authorization</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
