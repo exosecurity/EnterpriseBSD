@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Authentication &mdash; EnterpriseBSD Guide 0 documentation</title>
+    <title>Plugable Authentication Modules (PAM) &mdash; EnterpriseBSD Guide 0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,8 +24,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="EnterpriseBSD Guide 0 documentation" href="index.html" />
-    <link rel="next" title="Plugable Authentication Modules (PAM)" href="openpam.html" />
-    <link rel="prev" title="EnterpriseBSD Guide" href="index.html" />
+    <link rel="up" title="Authentication" href="authentication.html" />
+    <link rel="next" title="Kerberos" href="kerberos.html" />
+    <link rel="prev" title="Authentication" href="authentication.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -39,12 +40,13 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="openpam.html" title="Plugable Authentication Modules (PAM)"
+          <a href="kerberos.html" title="Kerberos"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="EnterpriseBSD Guide"
+          <a href="authentication.html" title="Authentication"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">EnterpriseBSD Guide 0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">EnterpriseBSD Guide 0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="authentication.html" accesskey="U">Authentication</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -53,25 +55,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="authentication">
-<h1>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h1>
-<p>Simply put, <em>authentication</em> is the act of verifying that an entity is who it claims to be; it answers the question, &#8220;Is the claim <em>authentic</em>?&#8221;
-Traditionally, authentication occurs via the means of a shared secret: a password or passphrase.
-The &#8220;shared&#8221; part is that the system <strong>and</strong> the authentic entity both have access to the secret for the purpose of identifying the entity to the system (a one-way validation).</p>
-<p>In Unix, and the BSD lineage, passwords are stored in a file on the system. For each system a user requires access to, the user must create and remember a password for that system.
-The human mind is not adept enough at creating and remembering multiple strong (15+ characters in length, upper and lower case letters, numbers, special characters, not a dictionary word, etc.) passwords.
-In an environment where a user must access multiple systems and applications, password management becomes a burden on both the users and system administrators.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="openpam.html">Plugable Authentication Modules (PAM)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="kerberos.html">Kerberos</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="kerberos.html#kerberos-protocol">Kerberos Protocol</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kerberos.html#kerberos-software">Kerberos Software</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kerberos.html#managing-a-kerberos-realm">Managing a Kerberos Realm</a></li>
-</ul>
-</li>
-</ul>
-</div>
+  <div class="section" id="plugable-authentication-modules-pam">
+<h1>Plugable Authentication Modules (PAM)<a class="headerlink" href="#plugable-authentication-modules-pam" title="Permalink to this headline">¶</a></h1>
+<p>FreeBSD uses the OpenPAM verstion of the PAM protocol to provide flexibility in its authentication mechnisms. The purpose of PAM is to allow programs which perform authentication for the system (ssh, login, telnet, ftp, pop3, imap, etc.) use a purpose-build authentication library rather than re-implementing the same functionality multiple times. In addition, the PAM library can utilize multiple authenticaiton mechnisims (passwd, Kerberos, LDAP, etc.) to provide the system administrator additional flexibility in how users are authenticated on a system. This flexibility comes at the cost of complexity (<em>A</em> protocols/programs x <em>B</em> mechanisms = <em>AB</em> possible failure points!)</p>
 </div>
 
 
@@ -81,15 +67,15 @@ In an environment where a user must access multiple systems and applications, pa
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">EnterpriseBSD Guide</a></p>
+  <p class="topless"><a href="authentication.html"
+                        title="previous chapter">Authentication</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="openpam.html"
-                        title="next chapter">Plugable Authentication Modules (PAM)</a></p>
+  <p class="topless"><a href="kerberos.html"
+                        title="next chapter">Kerberos</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/authentication.txt"
+      <li><a href="_sources/openpam.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -118,7 +104,7 @@ In an environment where a user must access multiple systems and applications, pa
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.2</a>
       
       |
-      <a href="_sources/authentication.txt"
+      <a href="_sources/openpam.txt"
           rel="nofollow">Page source</a></li>
     </div>
 

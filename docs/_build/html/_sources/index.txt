@@ -27,7 +27,7 @@ If you find this guide helpful, I would apprecate an `email`_ of support. If you
 .. _OpenBSD FAQ: http://www.openbsd.org/faq/index.html
 .. _DragonFly BSD Handbook: http://www.dragonflybsd.org/docs/newhandbook/
 .. _github: https://github.com/exosecurity/EnterpriseBSD
-.. _email: thanks@
+.. _email: mailto:comment@
 
 .. toctree::
    :hidden:
