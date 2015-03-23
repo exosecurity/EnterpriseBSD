@@ -13,6 +13,10 @@ Other sources of documentation are contained in mailing lists, `Stackoverflow`_ 
 However, because many home users do not use these advanced features, the questions, forum posts, and blogs do not exist for the more obscure or complex uses. 
 This guide is my contribution to the BSD ecosystem, a humble attempt at documenting in greater detail these features and how users --from the hobbyist to the start-up DevOp to the corporate SysAdmin-- can put the built-in features of the BSDs to work in their environments.
 
+Audience
+========
+This guide targets the single-host system administrators (hobbyists and small businesses) using *BSDs or a Linux distribution. Familarity with the command line and basic shell scripting abilities are assumed. 
+
 As an advanced warning or disclaimer: my experience is heavily weighted towards FreeBSD, the first iterations of the content on this site will be exclusivly FreeBSD-based. As my experience with the features of other BSDs grow, I aim to incorporate that knowledged here as well.
 
 If you find this guide helpful, I would apprecate an `email`_ of support. If you find an error, this project is hosted on `github`_, please submit a pull request.
@@ -27,12 +31,9 @@ If you find this guide helpful, I would apprecate an `email`_ of support. If you
 .. _OpenBSD FAQ: http://www.openbsd.org/faq/index.html
 .. _DragonFly BSD Handbook: http://www.dragonflybsd.org/docs/newhandbook/
 .. _github: https://github.com/exosecurity/EnterpriseBSD
-.. _email: mailto:comment@
+.. _email: mailto:comment@enterprisebsd.guide
 
 .. toctree::
    :hidden:
 
    authentication
-   
-
- 

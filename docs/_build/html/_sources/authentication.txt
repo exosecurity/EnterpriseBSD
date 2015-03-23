@@ -13,7 +13,7 @@ The human mind is not adept enough at creating and remembering multiple strong (
 In an environment where a user must access multiple systems and applications, password management becomes a burden on both the users and system administrators.
 
 .. toctree::
-   :maxdepth:1
+   :maxdepth:2
 
    openpam
    kerberos
